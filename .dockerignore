@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment — never copy the local venv into the build context
+.venv/
+venv/
+env/
+
+# Secrets — never bake .env into the image
+.env
+!.env.example
+
+# Tests and tooling — not needed in the production image
+tests/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Git
+.git/
+.github/
+.gitignore
+
+# Local databases / test artifacts
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

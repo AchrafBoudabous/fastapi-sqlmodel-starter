@@ -1,0 +1,40 @@
+repos:
+
+  # ── Fast checks (run on every commit) ────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: debug-statements
+      - id: no-commit-to-branch
+        args: ["--branch", "main"]
+
+  # ── Ruff: lint + format (replaces flake8, isort, black) ──────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # ── mypy: type checking (slower — skipped in fast mode) ──────────────────────
+  # Run manually with: pre-commit run mypy --all-files
+  # Or push to CI where it always runs in the type-check job.
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.0
+    hooks:
+      - id: mypy
+        args: ["--ignore-missing-imports"]
+        additional_dependencies:
+          - "pydantic>=2.7.0"
+          - "pydantic-settings>=2.3.0"
+          - "sqlmodel>=0.0.19"
+          - "types-passlib>=1.7.7"
+          - "types-python-jose>=3.3.4"
+        stages: [manual]  # only runs when explicitly invoked, not on every commit
