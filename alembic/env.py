@@ -4,7 +4,7 @@ from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlmodel import SQLModel
 
-import app.db.base 
+import app.db.base
 from alembic import context
 
 config = context.config
@@ -14,10 +14,12 @@ if config.config_file_name is not None:
 
 target_metadata = SQLModel.metadata
 
+
 def _get_url() -> str:
     from app.core.config import settings
 
     return settings.DATABASE_URL
+
 
 # Offline mode
 def run_migrations_offline() -> None:
